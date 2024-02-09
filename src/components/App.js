@@ -1,23 +1,27 @@
-// App.js
-import React from "react";
+import React, { useState } from "react";
 import CategoryFilter from "./CategoryFilter";
 import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
-import { CATEGORIES, TASKS } from "../data";
+import { CATEGORIES } from "../data";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
   const handleTaskFormSubmit = (formData) => {
-    // Add new task to the list with the text and category from the form data
-    console.log("New task submitted:", formData);
-    // You need to implement the logic to add the new task to the list (TASKS)
+    const newTask = {
+      id: tasks.length + 1, // Generate a unique ID for the new task
+      text: formData.text,
+      category: formData.category
+    };
+    setTasks([...tasks, newTask]); // Add the new task to the tasks array
   };
 
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter />
+      <CategoryFilter categories={CATEGORIES} />
       <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={handleTaskFormSubmit} />
-      <TaskList tasks={TASKS} />
+      <TaskList tasks={tasks} />
     </div>
   );
 }

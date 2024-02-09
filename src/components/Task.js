@@ -1,17 +1,20 @@
 import React from "react";
 
-function Task({ task, onDelete }) { // Accept task and onDelete as props
-  const { text, category } = task; // Destructure text and category from the task object
+function Task({ task, onDelete }) {
+  const { text, category } = task ||{};
 
   const handleDelete = () => {
-    onDelete(task); // Call onDelete with the task object when the delete button is clicked
+    if(task){
+      onDelete(task.id);
+    }
+    onDelete(task.id);
   };
 
   return (
     <div className="task">
       <div className="label">{category}</div>
       <div className="text">{text}</div>
-      <button className="delete" onClick={handleDelete}>X</button> {/* Call handleDelete onClick */}
+      <button className="delete" onClick={handleDelete}>X</button>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-// NewTaskForm.js
 import React, { useState } from "react";
 
 function NewTaskForm({ categories, onTaskFormSubmit }) {
@@ -24,8 +23,9 @@ function NewTaskForm({ categories, onTaskFormSubmit }) {
       <label>
         Category
         <select name="category" value={formData.category} onChange={handleChange}>
+          <option value="">Select a category</option>
           {categories.map((category) => (
-            category !== "All" && <option key={category} value={category}>{category}</option>
+            <option key={category} value={category}>{category}</option>
           ))}
         </select>
       </label>
